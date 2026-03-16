@@ -116,9 +116,20 @@ un array de elementos únicos, sin repetidos.
 onlyUniques("gato", "pollo", "cerdo", "cerdo"); //["gato", "pollo", "cerdo"]
 onlyUniques(1, 1, 2, 2, 3, 6, 7, 8); //[1, 2, 3, 6, 7, 8]
  */
-function onlyUniques(...argumentos){
+function onlyUniques(...argumentos) {
     //Ay que poner [] porque Set no es un array con lo cual hay que transformarlo a array
     return [...new Set(argumentos)];//Set no admite repetidos asi que los elimina y ... sirve para sacar los valores y sin new da error
+}
+//otra manera de hacerlo
+function onlyUniques(...argumentos) { // argumentos -> [1, 1, 2, 2, 3, 6, 7, 8]
+    let result = [];
+
+    for (let i = 0; i < argumentos.length; i++) {
+        if (!result.includes(argumentos[i])) {
+            result = [...result, argumentos[i]]; // result.push(argumentos[i])
+        }
+    }
+    return result;
 }
 
 console.log(onlyUniques("gato", "pollo", "cerdo", "cerdo"));//["gato", "pollo", "cerdo"]
@@ -130,7 +141,7 @@ combineAllArrays([3, 6, 7, 8], [2, 7, 3, 1]); // [3, 6, 7, 8, 2, 7, 3, 1]
 combineAllArrays([2, 7, 3, 1], [2, 7, 4, 12], [2, 44, 22, 7, 3, 1]); // [2, 7, 3, 1, 2, 7, 4, 12, 2, 44, 22, 7, 3, 1] */
 
 //Recibe todos los arrays y mételos en un array grande --> tipo asi combineAllArrays([3,6,7,8], [2,7,3,1])
-function combineAllArrays(...arraysYargumentos){
+function combineAllArrays(...arraysYargumentos) {
     //return arraysYargumentos.flat();//aplana el array
     return arraysYargumentos.reduce((acc, arr) => [...acc, ...arr], []);
 }
@@ -139,7 +150,7 @@ console.log(combineAllArrays([2, 7, 3, 1], [2, 7, 4, 12], [2, 44, 22, 7, 3, 1]))
 
 /*11.- Escriba una función llamada sumAndSquare que reciba cualquier número de argumentos, 
 los eleve al cuadrado y devuelva la suma de todos los valores cuadrados. */
-function sumAndSquare(...argumentos){
-    return argumentos.reduce((acc,num) => acc + num ** 2,0);
+function sumAndSquare(...argumentos) {
+    return argumentos.reduce((acc, num) => acc + num ** 2, 0);
 }
 console.log(sumAndSquare(2, 3));
